@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id("xyz.jpenilla.run-paper") version "2.3.1"
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+}
+
+group = 'me.aki'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "papermc-repo"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+}
+
+dependencies {
+    // Paper API: 1.21.1対応
+    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+
+    // 文字列処理の安全性と安定性のための必須ライブラリ
+    // 脆弱性 CVE-2025-48924 を回避するため、必ず 3.20.0 以上を使用します
+    implementation("org.apache.commons:commons-lang3:3.20.0")
+}
+
+tasks {
+    runServer {
+        minecraftVersion("1.21.1")
+
+        // 【重要】Windows環境での「筒筒筒」といった文字化けを根絶する設定
+        // サーバー実行時のJVMシステムプロパティをUTF-8に強制します
+        jvmArgs("-Dfile.encoding=UTF-8", "-Dsun.stdout.encoding=UTF-8", "-Dsun.stderr.encoding=UTF-8")
+    }
+
+    shadowJar {
+        archiveClassifier.set('')
+    }
+
+    assemble {
+        dependsOn(shadowJar)
+    }
+}
+
+def targetJavaVersion = 21
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}

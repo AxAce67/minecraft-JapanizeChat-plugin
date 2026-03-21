@@ -1,0 +1,16 @@
+name: JapanizeChat
+version: 1.0
+main: me.aki.japanizeChat.JapanizeChat
+api-version: '1.21'
+commands:
+  jp:
+    description: JapanizeChatのメインコマンド
+    usage: /jp <toggle|help|reload>
+    permission: japanizechat.use
+permissions:
+  japanizechat.use:
+    description: JapanizeChatの基本コマンドを使用する権限
+    default: true
+  japanizechat.admin:
+    description: 設定のリロードを行う権限
+    default: op

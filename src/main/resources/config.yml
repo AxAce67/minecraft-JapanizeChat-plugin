@@ -1,0 +1,10 @@
+# JapanizeChat 設定ファイル
+
+# 変換後のテキスト（）の色を指定します。
+# 指定可能な色の例: gray, white, gold, aqua, yellow, green, light_purple, red
+# hex形式（#FFFFFFなど）も使用可能です。
+converted-text-color: "gray"
+
+# 変換表示の初期設定（true: オン, false: オフ）
+# ※プレイヤーが /jp toggle を使うと、そのセッション中のみ上書きされます。
+default-toggle-state: true
