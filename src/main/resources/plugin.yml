@@ -1,16 +1,24 @@
-name: JapanizeChat
-version: 1.0
-main: me.aki.japanizeChat.JapanizeChat
-api-version: '1.21'
+name: JapaneseChat
+version: '${version}'
+main: sh.aki.japanesechat.JapaneseChatPlugin
+api-version: '1.18'
+description: Adds the Japanese reading of romaji chat messages, with optional kanji.
+authors: [AxAce67]
+website: https://github.com/AxAce67/JapaneseChat
+
 commands:
   jp:
-    description: JapanizeChatのメインコマンド
-    usage: /jp <toggle|help|reload>
-    permission: japanizechat.use
+    description: JapaneseChat settings
+    usage: /jp [on|off|view|help]
+    aliases: [japanesechat]
+    permission: japanesechat.use
+
 permissions:
-  japanizechat.use:
-    description: JapanizeChatの基本コマンドを使用する権限
+  japanesechat.use:
+    description: Messages are converted, and /jp can be used.
     default: true
-  japanizechat.admin:
-    description: 設定のリロードを行う権限
+  japanesechat.admin:
+    description: /jp test and /jp reload.
     default: op
+    children:
+      japanesechat.use: true

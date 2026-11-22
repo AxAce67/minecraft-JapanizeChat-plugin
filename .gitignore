@@ -1,7 +1,7 @@
+.DS_Store
 .gradle/
-.idea/
-bin/
 build/
-run/
 out/
+.idea/
 *.iml
+run/

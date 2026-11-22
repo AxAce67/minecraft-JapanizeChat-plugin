@@ -1,10 +1,23 @@
-# JapanizeChat 設定ファイル
+# JapaneseChat configuration
+# Changes take effect after /jp reload.
 
-# 変換後のテキスト（）の色を指定します。
-# 指定可能な色の例: gray, white, gold, aqua, yellow, green, light_purple, red
-# hex形式（#FFFFFFなど）も使用可能です。
-converted-text-color: "gray"
+config-version: 2
 
-# 変換表示の初期設定（true: オン, false: オフ）
-# ※プレイヤーが /jp toggle を使うと、そのセッション中のみ上書きされます。
-default-toggle-state: true
+# Message language: auto (each player's game language), en, ja
+language: auto
+
+kanji:
+  # Convert the kana to kanji with Google Input Tools. This sends the kana of each converted message
+  # to Google. When it is off, or Google does not answer in time, the kana are shown.
+  enabled: true
+  timeout-ms: 2000
+
+# Added after the message. MiniMessage; <converted> is the conversion.
+format: " <gray>(<converted>)"
+
+# Defaults for players who have not chosen with /jp.
+defaults:
+  # Convert the player's own messages (/jp on, /jp off)
+  convert: true
+  # Show conversions of other players' messages (/jp view)
+  view: true

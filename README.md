@@ -1,34 +1,84 @@
-# minecraft-JapanizeChat-plugin
+# JapaneseChat
 
-Minecraft Paper 用のチャット日本語化プラグインです。ローマ字入力をひらがなへ変換し、変換結果をチャットに表示します。
+A Paper plugin for Japanese chat typed in romaji. The Japanese reading is added after the message:
 
-## 機能
-- ローマ字入力をひらがなへ変換
-- 変換結果を元のチャットに括弧付きで表示
-- 個別に変換表示のオン/オフ切り替え
-- 権限を持つプレイヤーによる設定リロード
-
-## コマンド
-- `/jp toggle` 変換表示のオン/オフを切り替え
-- `/jp help` 使い方を表示
-- `/jp reload` 設定を再読み込み（権限: `japanizechat.admin`）
-
-## 権限
-- `japanizechat.admin` リロード許可
-
-## 設定
-`config.yml` の `converted-text-color` で変換文字色を指定できます。
-- `gray` のような色名
-- `#RRGGBB` の 16 進カラー
-
-## 対応環境
-- Paper 1.20 系（想定）
-
-## ビルド
-```bash
-gradle build
+```
+<Steve> kyou ha ii tenki (今日はいい天気)
 ```
 
-## 仕様メモ
-- 日本語入力 API に Google Input Tools を利用しています。
-- 英数字以外の入力は変換しません。
+[日本語版 README](README.ja.md)
+
+- IME-style romaji to kana (`konnichiha`, `minna`, `gakkou`, `kyou`, `ra-men`, ...), then kanji
+- English is left alone. Words with capital letters, URLs and player names stay as they are
+  (`kore OK desu` → `これ OK です`), and so do a few English words in a romaji sentence
+  (`kyou no event tanoshimi` → `今日の event 楽しみ`). With more English words than that, the message is
+  not converted.
+- Keeps the chat format of other plugins; the conversion is added to the message
+- Players choose whether their messages are converted and whether they see conversions
+- English and Japanese messages, per player
+
+## Requirements
+
+- Paper 1.18.2 – 26.x, or a fork such as Purpur. Spigot and Folia are not supported.
+  (1.18.2 is the first Paper with MiniMessage built in.)
+- Java 17 or newer (whatever your Paper version needs)
+
+## Kanji and privacy
+
+Kanji come from Google Input Tools, an unofficial Google service. For each converted message the
+kana are sent to Google; the player name and other messages are not. The plugin waits at most
+`kanji.timeout-ms` (2 seconds) and caches results; when Google does not answer, the kana are shown.
+Set `kanji.enabled: false` to send nothing and show kana only.
+
+Chat is converted on Paper's chat thread, so waiting for Google never stops the server.
+
+## Commands
+
+`/jp` is short for `/japanesechat`.
+
+| Command | Permission | |
+|---|---|---|
+| `/jp` | `japanesechat.use` | Your settings and help |
+| `/jp on`, `/jp off` | `japanesechat.use` | Convert your own messages or not |
+| `/jp view [on\|off]` | `japanesechat.use` | Show conversions of other players' messages or not |
+| `/jp test <text>` | `japanesechat.admin` | Try a conversion (also from the console) |
+| `/jp reload` | `japanesechat.admin` | Reload config and messages |
+
+`japanesechat.use` is granted to everyone (only players with it have their messages converted),
+`japanesechat.admin` to operators. Player choices are saved with the player data.
+
+## Configuration
+
+```yaml
+language: auto            # auto (each player's game language), en, ja
+
+kanji:
+  enabled: true           # false: kana only, nothing is sent to Google
+  timeout-ms: 2000
+
+format: " <gray>(<converted>)"   # MiniMessage, added after the message
+
+defaults:                 # for players who have not used /jp
+  convert: true
+  view: true
+```
+
+To change messages, create `plugins/JapaneseChat/lang/messages_en.properties` (or `messages_ja`) with
+only the keys you want to change. The keys are in
+[messages.properties](src/main/resources/lang/messages.properties).
+
+Upgrading from 1.x (JapanizeChat): remove the old jar. The `plugins/JapanizeChat` folder is moved to
+`plugins/JapaneseChat`, permissions are now `japanesechat.*`, `config.yml` is converted on first start (the old file is kept as `config-1.x.yml`),
+and players' "hide conversions" choice is moved over when they join.
+
+## Building
+
+```bash
+./gradlew build                     # jar in build/libs, runs the unit tests
+./gradlew runServer                 # test server
+scripts/smoke-test.sh 1.18.2 26.3   # real servers per version
+```
+
+## License
+
+[MIT](LICENSE)
