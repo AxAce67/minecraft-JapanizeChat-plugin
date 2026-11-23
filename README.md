@@ -1,6 +1,17 @@
+<div align="center">
+
+<img src=".github/icon.png" width="96" height="96" alt="">
+
 # JapaneseChat
 
+Adds the Japanese reading to Minecraft chat typed in romaji
+
+[![build](https://img.shields.io/github/actions/workflow/status/AxAce67/JapaneseChat/ci.yml?branch=main&label=build)](https://github.com/AxAce67/JapaneseChat/actions/workflows/ci.yml) [![release](https://img.shields.io/github/v/release/AxAce67/JapaneseChat?include_prereleases&label=release)](https://github.com/AxAce67/JapaneseChat/releases) [![Modrinth](https://img.shields.io/modrinth/dt/japanesechat?logo=modrinth&label=Modrinth&color=00AF5C)](https://modrinth.com/plugin/japanesechat) [![license](https://img.shields.io/github/license/AxAce67/JapaneseChat)](LICENSE)<br>
+![Minecraft](https://img.shields.io/badge/Minecraft-1.18.2%E2%80%9326.3-62B47A) ![server](https://img.shields.io/badge/server-Paper%20%7C%20Purpur-1E88E5) ![Java](https://img.shields.io/badge/Java-17%2B-E76F00)
+
 **English** | [日本語](README.ja.md)
+
+</div>
 
 Download: [Modrinth](https://modrinth.com/plugin/japanesechat) · [GitHub Releases](https://github.com/AxAce67/JapaneseChat/releases)
 
