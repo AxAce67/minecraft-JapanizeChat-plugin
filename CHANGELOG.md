@@ -5,7 +5,7 @@ All notable changes to this project are documented here. Versions follow
 
 ## Unreleased
 
-## 2.0.0
+## 2.0.0 - 2026-11-23
 
 A rewrite, renamed from JapanizeChat. The old `plugins/JapanizeChat` folder is moved to
 `plugins/JapaneseChat`, the 1.x config is converted automatically and kept as `config-1.x.yml`; players' choices
