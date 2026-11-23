@@ -1,12 +1,14 @@
 # JapaneseChat
 
-A Paper plugin for Japanese chat typed in romaji. The Japanese reading is added after the message:
+**English** | [日本語](README.ja.md)
+
+Download: [Modrinth](https://modrinth.com/plugin/japanesechat) · [GitHub Releases](https://github.com/AxAce67/JapaneseChat/releases)
+
+A Minecraft server plugin (Paper / Purpur) for Japanese chat typed in romaji. The Japanese reading is added after the message:
 
 ```
 <Steve> kyou ha ii tenki (今日はいい天気)
 ```
-
-[日本語版 README](README.ja.md)
 
 - IME-style romaji to kana (`konnichiha`, `minna`, `gakkou`, `kyou`, `ra-men`, ...), then kanji
 - English is left alone. Words with capital letters, URLs and player names stay as they are

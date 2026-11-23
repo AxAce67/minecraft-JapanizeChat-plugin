@@ -1,12 +1,14 @@
 # JapaneseChat
 
-ローマ字で打ったチャットに、日本語の読みを付ける Paper 用プラグインです。発言の後ろに変換結果が付きます。
+[English](README.md) | **日本語**
+
+ダウンロード: [Modrinth](https://modrinth.com/plugin/japanesechat) · [GitHub Releases](https://github.com/AxAce67/JapaneseChat/releases)
+
+ローマ字で打ったチャットに、日本語の読みを付ける Minecraft サーバー（Paper / Purpur）用のプラグインです。発言の後ろに変換結果が付きます。
 
 ```
 <Steve> kyou ha ii tenki (今日はいい天気)
 ```
-
-[English README](README.md)
 
 - IME と同じようにローマ字をかなに変換し（`konnichiha`、`minna`、`gakkou`、`kyou`、`ra-men` など）、さらに漢字に変換
 - 英語は変換しません。大文字を含む単語・URL・プレイヤー名はそのまま残します（`kore OK desu` → `これ OK です`）。
